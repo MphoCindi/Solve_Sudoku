@@ -20,7 +20,7 @@ class JTextFieldLimit extends javax.swing.text.PlainDocument {
         return limit;
     }
 
-    @Override
+
     public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
         if (str == null) return;
 
