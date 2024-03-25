@@ -32,6 +32,7 @@ public class sudoku extends JFrame {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 JTextField textField = new JTextField();
+                textField.setDocument(new JTextFieldLimit(1)); // Set the document here
                 textField.setHorizontalAlignment(JTextField.CENTER);
                 if ((i / 3 + j / 3) % 2 == 0) {
                     textField.setBackground(Color.LIGHT_GRAY);
@@ -46,6 +47,7 @@ public class sudoku extends JFrame {
                 sudokuPanel.add(textField);
             }
         }
+
 
 
         JButton solveButton = new JButton("Solve Puzzle");
@@ -76,4 +78,5 @@ public class sudoku extends JFrame {
     public static void main(String[] args) {
         new sudoku();
     }
+
 }
