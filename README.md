@@ -8,5 +8,3 @@ What the program is doing currently:
 - Provides a "Solve Puzzle" button to automatically solve the puzzle (currently placeholder functionality).
 - Includes an "Exit" button to close the application.
 
-Note:
-- The program is allowing letters and multiple numbers for now, still trying to figure that.
