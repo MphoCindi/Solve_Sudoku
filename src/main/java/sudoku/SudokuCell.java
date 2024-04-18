@@ -64,8 +64,7 @@ public class SudokuCell {
     }
 
     public boolean highlightCell(int num){
-        if (rowConditionMet(num) | colConditionMet(num) | blockConditionMet(num)) return true;
-        else return false;
+        return rowConditionMet(num) && colConditionMet(num) && blockConditionMet(num);
     }
 
 }
