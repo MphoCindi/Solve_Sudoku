@@ -4,10 +4,10 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 
 //This class is to make sure that it takes a single number and also it does not take ant letters
-class JTextFieldLimit extends javax.swing.text.PlainDocument {
+class limit extends javax.swing.text.PlainDocument {
     private int limit;
 
-    JTextFieldLimit(int limit) {
+    limit(int limit) {
         super();
         this.limit = limit;
     }

@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class Sudoku extends JFrame {
+class sudoku extends JFrame {
     private JPanel sudokuPanel;
     private JPanel buttonPanel;
     private int[][] puzzle = {
@@ -21,7 +21,7 @@ class Sudoku extends JFrame {
             {0, 0, 0, 0, 8, 0, 0, 7, 9}
     };
 
-    public Sudoku() {
+    public sudoku() {
         setTitle("Sudoku Puzzle");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 450);
@@ -29,27 +29,7 @@ class Sudoku extends JFrame {
         sudokuPanel = new JPanel(new GridLayout(9, 9));
         buttonPanel = new JPanel(new FlowLayout());
 
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                JTextField textField = new JTextField();
-                textField.setDocument(new JTextFieldLimit(1));
-                textField.setHorizontalAlignment(JTextField.CENTER);
-                textField.setPreferredSize(new Dimension(40, 40));
-                textField.setFont(new Font("Arial", Font.BOLD, 15));
-                textField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                if ((i / 3 + j / 3) % 2 == 0) {
-                    textField.setBackground(new Color(220, 220, 220));
-                } else {
-                    textField.setBackground(Color.WHITE);
-                }
-                if (puzzle[i][j] != 0) {
-                    textField.setText(String.valueOf(puzzle[i][j]));
-                    textField.setEditable(false);
-                    textField.setForeground(Color.BLACK);
-                }
-                sudokuPanel.add(textField);
-            }
-        }
+        initializeGrid();
 
         JButton solveButton = new JButton("Solve Puzzle");
         solveButton.setPreferredSize(new Dimension(150, 30));
@@ -80,6 +60,30 @@ class Sudoku extends JFrame {
         setVisible(true);
     }
 
+    private void initializeGrid() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                JTextField textField = new JTextField();
+                textField.setDocument(new limit(1));
+                textField.setHorizontalAlignment(JTextField.CENTER);
+                textField.setPreferredSize(new Dimension(40, 40));
+                textField.setFont(new Font("Arial", Font.BOLD, 15));
+                textField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                if ((i / 3 + j / 3) % 2 == 0) {
+                    textField.setBackground(new Color(220, 220, 220));
+                } else {
+                    textField.setBackground(Color.WHITE);
+                }
+                if (puzzle[i][j] != 0) {
+                    textField.setText(String.valueOf(puzzle[i][j]));
+                    textField.setEditable(false);
+                    textField.setForeground(Color.BLACK);
+                }
+                sudokuPanel.add(textField);
+            }
+        }
+    }
+
     private void solvePuzzle() {
         SudokuSolver solver = new SudokuSolver(puzzle);
         if (solver.solveSudoku(0, 0)) {
@@ -98,9 +102,6 @@ class Sudoku extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Sudoku();
+        new sudoku();
     }
 }
-
-
-

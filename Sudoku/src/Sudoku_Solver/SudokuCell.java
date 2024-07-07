@@ -1,4 +1,4 @@
-package main.java.sudoku;
+package Sudoku_Solver;
 
 import java.util.Arrays;
 /*In this class I'll try to implement logic that will make the cell
