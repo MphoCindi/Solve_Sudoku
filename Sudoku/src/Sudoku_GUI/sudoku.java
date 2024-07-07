@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 class sudoku extends JFrame {
     private JPanel sudokuPanel;
@@ -78,10 +80,47 @@ class sudoku extends JFrame {
                     textField.setText(String.valueOf(puzzle[i][j]));
                     textField.setEditable(false);
                     textField.setForeground(Color.BLACK);
+                } else {
+                    int row = i;
+                    int col = j;
+                    textField.addKeyListener(new KeyAdapter() {
+                        @Override
+                        public void keyReleased(KeyEvent e) {
+                            String text = textField.getText();
+                            if (!text.isEmpty() && Character.isDigit(text.charAt(0))) {
+                                int num = Integer.parseInt(text);
+                                if (isValid(num, row, col)) {
+                                    textField.setForeground(Color.BLACK);
+                                } else {
+                                    textField.setForeground(Color.RED);
+                                }
+                            } else {
+                                textField.setForeground(Color.BLACK);
+                            }
+                        }
+                    });
                 }
                 sudokuPanel.add(textField);
             }
         }
+    }
+
+    private boolean isValid(int num, int row, int col) {
+        for (int i = 0; i < 9; i++) {
+            if (puzzle[row][i] == num || puzzle[i][col] == num) {
+                return false;
+            }
+        }
+        int boxRow = row - row % 3;
+        int boxCol = col - col % 3;
+        for (int i = boxRow; i < boxRow + 3; i++) {
+            for (int j = boxCol; j < boxCol + 3; j++) {
+                if (puzzle[i][j] == num) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private void solvePuzzle() {
