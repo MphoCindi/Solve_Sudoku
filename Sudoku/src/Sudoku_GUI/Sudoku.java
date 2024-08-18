@@ -110,28 +110,47 @@ class Sudoku extends JFrame {
     private boolean isValid(int num, int row, int col) {
         // Check if the entered number matches the solved puzzle's number at the same position
         boolean solved = solver.solveSudoku(0, 0);
-        int[][] solvedPuzzle = solver.puzzle();
+        int[][] solvedPuzzle = solver.getPuzzle();
         return solvedPuzzle[row][col] == num;
     }
 
 
     private void solvePuzzle() {
-
-
         if (solver.solveSudoku(0, 0)) {
-            int[][] solution = solver.puzzle();
+            int[][] solution = solver.getPuzzle();
 
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
                     Component[] components = sudokuPanel.getComponents();
                     JTextField textField = (JTextField) components[i * 9 + j];
-                    textField.setText(String.valueOf(solution[i][j]));
+
+                    String userInput = textField.getText();
+
+                    if (!userInput.isEmpty() && Character.isDigit(userInput.charAt(0))) {
+                        int num = Integer.parseInt(userInput);
+
+                        if (num != solution[i][j]) {
+                            // Highlight the incorrect cell with a red background
+                            textField.setBackground(Color.RED);
+                            textField.setForeground(Color.WHITE);
+                        } else {
+                            // Correct cell, display in green
+                            textField.setBackground(Color.GREEN);
+                            textField.setForeground(Color.BLACK);
+                        }
+                    } else {
+                        // If the cell was empty or had non-digit input, just show the solution in green
+                        textField.setText(String.valueOf(solution[i][j]));
+                        textField.setBackground(Color.GREEN);
+                        textField.setForeground(Color.BLACK);
+                    }
                 }
             }
         } else {
             JOptionPane.showMessageDialog(null, "No solution found!");
         }
     }
+
 
     public static void main(String[] args) {
         new Sudoku();

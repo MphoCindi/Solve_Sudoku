@@ -28,7 +28,7 @@ public class SudokuSolver {
         return false;
     }
 
-    public int[][] puzzle(){
+    public int[][] getPuzzle(){
         return this.grid;
     }
 
