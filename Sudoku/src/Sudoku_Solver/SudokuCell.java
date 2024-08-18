@@ -1,4 +1,4 @@
-package Sudoku_Solver;
+package Sudoku.src.Sudoku_Solver;
 
 import java.util.Arrays;
 /*In this class I'll try to implement logic that will make the cell
@@ -64,8 +64,7 @@ public class SudokuCell {
     }
 
     public boolean highlightCell(int num){
-        if (rowConditionMet(num) | colConditionMet(num) | blockConditionMet(num)) return true;
-        else return false;
+        return rowConditionMet(num) | colConditionMet(num) | blockConditionMet(num);
     }
 
 }

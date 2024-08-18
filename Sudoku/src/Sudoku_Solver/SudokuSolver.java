@@ -1,7 +1,7 @@
-package Sudoku_Solver;
+package Sudoku.src.Sudoku_Solver;
 
 public class SudokuSolver {
-    public int[][] grid = new int[9][9];
+    public int[][] grid;
     public final int COLSIZE;
     public final int ROWSIZE;
 
@@ -26,6 +26,10 @@ public class SudokuSolver {
             grid[row][col] = 0;
         }
         return false;
+    }
+
+    public int[][] puzzle(){
+        return this.grid;
     }
 
     private boolean cellMeetsAllConditions(int row, int col, int cell){

@@ -1,4 +1,4 @@
-package Sudoku_GUI;
+package Sudoku.src.Sudoku_GUI;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;

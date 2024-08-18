@@ -1,6 +1,6 @@
-package Sudoku_GUI;
+package Sudoku.src.Sudoku_GUI;
 
-import Sudoku_Solver.SudokuSolver;
+import Sudoku.src.Sudoku_Solver.SudokuSolver;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,10 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-class sudoku extends JFrame {
-    private JPanel sudokuPanel;
+class Sudoku extends JFrame {
+    private final JPanel sudokuPanel;
     private JPanel buttonPanel;
-    private int[][] puzzle = {
+    private final int[][] puzzle = {
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
             {0, 9, 8, 0, 0, 0, 0, 6, 0},
@@ -23,7 +23,9 @@ class sudoku extends JFrame {
             {0, 0, 0, 0, 8, 0, 0, 7, 9}
     };
 
-    public sudoku() {
+    SudokuSolver solver = new SudokuSolver(puzzle);
+
+    public Sudoku() {
         setTitle("Sudoku Puzzle");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 450);
@@ -106,27 +108,18 @@ class sudoku extends JFrame {
     }
 
     private boolean isValid(int num, int row, int col) {
-        for (int i = 0; i < 9; i++) {
-            if (puzzle[row][i] == num || puzzle[i][col] == num) {
-                return false;
-            }
-        }
-        int boxRow = row - row % 3;
-        int boxCol = col - col % 3;
-        for (int i = boxRow; i < boxRow + 3; i++) {
-            for (int j = boxCol; j < boxCol + 3; j++) {
-                if (puzzle[i][j] == num) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        // Check if the entered number matches the solved puzzle's number at the same position
+        boolean solved = solver.solveSudoku(0, 0);
+        int[][] solvedPuzzle = solver.puzzle();
+        return solvedPuzzle[row][col] == num;
     }
 
+
     private void solvePuzzle() {
-        SudokuSolver solver = new SudokuSolver(puzzle);
+
+
         if (solver.solveSudoku(0, 0)) {
-            int[][] solution = solver.grid;
+            int[][] solution = solver.puzzle();
 
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
@@ -141,6 +134,6 @@ class sudoku extends JFrame {
     }
 
     public static void main(String[] args) {
-        new sudoku();
+        new Sudoku();
     }
 }
